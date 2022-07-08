@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\ClientResources;
+use Illuminate\Support\Facades\Schema;
+
 
 class AdminResourceController extends Controller
 {
@@ -24,7 +26,7 @@ class AdminResourceController extends Controller
     
     public function create()
     {
-        $pm = [['id'=>0,'name'=>"Primary"],['id'=>1,'name'=>"Secondary"]];
+        $pm = [['id'=>1,'name'=>"PM"],['id'=>0,'name'=>"Resource"]];
         return view('admin.createresources',['pm'=>$pm]);
     }
 
@@ -36,18 +38,23 @@ class AdminResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->title;
+        $user->email = $request->content;
+        $user->password = bcrypt('123');
+        $user->role = $request->pmid;
+        $user->save();
+        
+        return redirect('/admin/resources');
+        // dd($request->input());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $coloumns = Schema::getColumnListing('users');
+        return view('admin.viewclients',['item'=>$user,'column'=>$coloumns]);
     }
 
     /**
@@ -58,29 +65,8 @@ class AdminResourceController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $user = User::find($id);
+        $pm = [['id'=>1,'name'=>"PM",'role'=>'pm'],['id'=>0,'name'=>"Resource",'role'=>'resource']];
+        return view('admin.editresource',['userinfo'=>$user,'pm'=>$pm]);
     }
 }

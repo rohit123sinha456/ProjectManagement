@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminLogin;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminResourceController;
+use App\Http\Controllers\Admin\AdminResourceControllerUtil;
 use App\Http\Controllers\Pm\PmLogin;
 use App\Http\Controllers\Pm\ObjectController;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/dashboard',[AdminLogin::class,'index'])->middleware('useraccess:admin');
     Route::resource('clients',AdminClientController::class)->middleware('useraccess:admin');
     Route::resource('resources',AdminResourceController::class)->middleware('useraccess:admin');
+    Route::post('update/resources/{id}',[AdminResourceControllerUtil::class,'updateresource'])->middleware('useraccess:admin');
 
 });
 

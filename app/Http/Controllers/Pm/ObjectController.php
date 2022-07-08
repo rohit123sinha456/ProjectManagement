@@ -96,7 +96,7 @@ class ObjectController extends Controller
         $coloumns[count($coloumns)] = "srname";
         $objectdetails = Arr::add($clientobject, 'srname' , $secondary_resource);
         return view('pm.viewobject',['item'=>$objectdetails,'column'=>$coloumns]);
-        dd($secondary_resource);
+        //dd($secondary_resource);
         
     }
 }

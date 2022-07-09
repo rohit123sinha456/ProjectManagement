@@ -26,21 +26,21 @@ function index(){
             'password' => 'required|min:2'
            ]);
            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            session(['uid' => Auth::id()]);
+            session(['user' => Auth::id()]);
             return redirect('/pm/dashboard');
         }
         return redirect('/pm');
     }
 
     function viewclients(){
-        $pmid = session('uid');
+        $pmid = session('user');
         $pm_clients = ClientResources::where('user_id',$pmid)->get();
         $pm_client_id = array();
         foreach($pm_clients as $pc){
             array_push($pm_client_id,$pc->client_id);
         }
         $pm_client_ids = array_values(array_unique($pm_client_id));
-        $clients = Client::whereIn('id',$pm_client_ids)->get();;
+        $clients = Client::whereIn('id',$pm_client_ids)->get();
         return view('pm.clients',['clients'=>$clients]);
     }
 

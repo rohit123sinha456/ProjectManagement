@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\AdminResourceController;
 use App\Http\Controllers\Admin\AdminResourceControllerUtil;
 use App\Http\Controllers\Pm\PmLogin;
 use App\Http\Controllers\Pm\ObjectController;
+use App\Http\Controllers\Resource\ResourceLogin;
+use App\Http\Controllers\Resource\ResourceController;
+
+
 use Illuminate\Http\Request;
 
 /*
@@ -63,5 +67,17 @@ Route::prefix('pm')->group(function () {
     Route::get('/object/updatestaterunning/{id}',[ObjectController::class,'updatestaterunning'])->middleware('useraccess:pm');
     Route::get('/object/updatestaterejected/{id}',[ObjectController::class,'updatestaterejected'])->middleware('useraccess:pm');
     Route::get('/object/view/{id}',[ObjectController::class,'showdetails'])->middleware('useraccess:pm');
+
+});
+
+Route::prefix('resource')->group(function(){
+    Route::post('/login',[ResourceLogin::class,'login']);
+    Route::get('/dashboard',[ResourceLogin::class,'index'])->middleware('useraccess:resource');
+    Route::get('/timesheetselectdate',[ResourceController::class,'selectdate'])->middleware('useraccess:resource');
+    Route::post('/selecteddate',[ResourceController::class,'viewtimesheet'])->middleware('useraccess:resource');
+    Route::get('/selecteddate',function(){
+        return redirect('/resource/timesheetselectdate');
+    })->middleware('useraccess:resource');
+    Route::post('/submittimesheet',[ResourceController::class,'submittimesheet'])->middleware('useraccess:resource');
 
 });

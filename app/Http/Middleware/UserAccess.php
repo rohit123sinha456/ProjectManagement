@@ -16,7 +16,7 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next,$userrole)
     {
-        if(auth()->user()->role === $userrole ){
+        if(auth()->user()->role === $userrole && $request->session()->has('user')){
         return $next($request);}
 
         return response()->json([auth()->user()->role]);

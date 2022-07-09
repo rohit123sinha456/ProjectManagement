@@ -25,7 +25,7 @@ class AdminLogin extends Controller
         'password' => 'required|min:2'
        ]);
        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        // session(['admin' => bcrypt('admin')]);
+        session(['user' => Auth::id()]);
         return redirect('/admin/dashboard');
     }
     return redirect('/admin');

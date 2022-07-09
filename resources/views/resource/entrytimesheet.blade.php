@@ -98,7 +98,7 @@
                             <tr> 
                               <td><input type="button" value="Add Row" onclick="addRows()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" /></td> 
                               <td><input type="button" value="Delete Row" onclick="deleteRows()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" /></td> 
-                              <td><input type="submit" value="Submit" / class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"></td> 
+                              <td><input type="submit" value="Save" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"></td> 
                             </tr>  
                           </table> 
 

@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\ClientObject;
 use App\Models\ClientObjectRelations;
 use App\Models\Timesheet;
-
+use Illuminate\Support\Facades\DB;
 
 
 class ResourceController extends Controller
@@ -64,5 +64,43 @@ class ResourceController extends Controller
         return redirect('/resource/timesheetselectdate');
 
         // dd($request->input());
+    }
+
+    function viewtimesheetentry(Request $request){
+        if($request->date === null){
+            return view('resource.viewtimesheetentry',['nodate'=>true]);
+        }
+        else{
+            $selecteddate = $request->date;
+            $userid = session('user');
+            $entries = DB::table('timesheets')->where([
+                ['user_id', '=', $userid],
+                ['date', '=', $selecteddate],
+            ])->get();
+            $objectids = array();
+            foreach($entries as $entry){
+                array_push($objectids,$entry->object_id);
+            }
+            $uniqueobjectids = array_values(array_unique($objectids));
+            $objects = ClientObject::whereIn('id',$uniqueobjectids)->get();
+            $objectsname = array();
+            foreach($objects as $object){
+                $objectsname[$object->id] = $object->name;
+            }
+            return view('resource.viewtimesheetentry',['nodate'=>false,'objects'=>$objectsname,'entries'=>$entries]);
+        }
+    }
+
+    function submittimesheetentry(Request $request){
+        $timesheets = Timesheet::find($request->tsid);
+        $datalength = count($timesheets->toArray());
+        for($i=0;$i<$datalength;$i++){
+            if($timesheets[$i]->is_submitted == 0){
+            $timesheets[$i]->hours = $request->hours[$i];
+            $timesheets[$i]->is_submitted = 1;
+            $timesheets[$i]->save();
+            }
+        }
+        return redirect("/resource/viewtimesheetentry");
     }
 }

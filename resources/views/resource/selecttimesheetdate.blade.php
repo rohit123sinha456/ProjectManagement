@@ -21,15 +21,7 @@
                         <h4 class="card-title">Objects</h4>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1"></label>
-                                @if($dateselected)
-                                <select class="form-control form-control-lg" id="oid" name="oid">
-                                    @foreach ($objects as $item)
-                                    <option value={{$item->id}}>{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-                                @else
-                                <p>Select a date to proceed</p>
-                                @endif
+                                  <p>Select a date to proceed</p>
                               </div> 
                       </div>
                     </div>
@@ -39,7 +31,7 @@
                     <div class="card">
                       <div class="card-body">
                         <h4 class="card-title">Timesheet</h4>
-                        <p class="card-description">
+                        
                             <div class="form-group">
                                 <label>Date </label>
                                 @if(!$dateselected)
@@ -59,45 +51,8 @@
                                 @endif
 
                               </div>
-                        </p>
-                        @if(!$dateselected)
-                        select a date
-                        @else
-                        <div class="table-responsive">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>
-                                  Particulars
-                                </th>
-                                <th>
-                                  Details
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($column as $colname)
-                            <tr>
-                              <td>
-                               {{$colname}}
-                              </td>
-                              <td>
-                                @if($issubmit)
-                                    20
-                                @else
-                                <div class="form-group">
-                                    <input type="number" class="form-control" id={{$colname}} name={{$colname}} placeholder="Name">
-                                  </div>
-                                @endif
-
-                              </td>
-                            </tr>
-                            @endforeach
-                              
-                            </tbody>
-                          </table>
-                        </div>
-                    @endif
+                      
+                        
                       </div>
                     </div>
                   </div>

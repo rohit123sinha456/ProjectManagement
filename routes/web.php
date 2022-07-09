@@ -79,5 +79,10 @@ Route::prefix('resource')->group(function(){
         return redirect('/resource/timesheetselectdate');
     })->middleware('useraccess:resource');
     Route::post('/submittimesheet',[ResourceController::class,'submittimesheet'])->middleware('useraccess:resource');
+    Route::get('/viewtimesheetentry',[ResourceController::class,'viewtimesheetentry'])->middleware('useraccess:resource');
+    Route::post('/viewtimesheetentry',[ResourceController::class,'viewtimesheetentry'])->middleware('useraccess:resource');
+    Route::post('/submittimesheetentry',[ResourceController::class,'submittimesheetentry'])->middleware('useraccess:resource');
+
+    Route::get('/vieweffortestimation',[ResourceController::class,'vieweffortestimation'])->middleware('useraccess:resource');
 
 });

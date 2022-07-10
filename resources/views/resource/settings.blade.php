@@ -1,59 +1,55 @@
 @include('layouts.header')
+
     <div class="container-scroller">
         @include('resource.layouts.topnav')
     <div class="container-fluid page-body-wrapper">
     @include('resource.layouts.navbar')
         <div class="main-panel">
             <div class="content-wrapper">
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/resource/passwordreset">Change Password</a>
+                </li>
+              </ul>
+                       
               <div class="row">
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Clients </h4>
+                        <h4 class="card-title"> </h4>
                         <p class="card-description">
-                          Add class <code>.table-striped</code>
-
+                          
                         </p>
                         <div class="table-responsive">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>
-                                   Name
-                                </th>
-                                
-                                <th>
-                                  Description
-                                </th>
-                               
-                                <th>
-                                  Actions
-                                </th>
-                               
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @foreach ($entries as $item)
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>
+                                    Particulars
+                                  </th>
+                                  <th>
+                                    Details
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              @foreach ($column as $colname)
                               <tr>
                                 <td>
-                                 {{$item->name}}
+                                 {{$colname}}
                                 </td>
                                 <td>
-                                  {{$item->description}}
-                              </td>
-                            
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                      <form action="/resource/filleffortestimation/{{$item->id}}" method="GET"> <button type="submit" value="Submit" class="btn btn-outline-secondary btn-sm">Fill Effort Estimation</button> </form>
-                                    </div>
+                                 {{$item->$colname}}
                                 </td>
-                               
                               </tr>
                               @endforeach
-                            </tbody>
-                          </table>
-                      
-                        </div>
+                                
+                              </tbody>
+                            </table>
+                          </div>
                       </div>
                     </div>
                   </div>

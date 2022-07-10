@@ -178,4 +178,32 @@ class ResourceController extends Controller
         }
         return redirect('/resource/vieweffortestimation');
     }
+
+    function showresourceSettings(Request $request){
+        $studentid = $request->session()->get('user');//Crypt::decryptString($request->session()->get('user'));
+        $studentdetails = User::find($studentid);
+        $coloumns = Schema::getColumnListing('users');
+        $not_fillable_coloumn = array('email_verified_at','password','remember_token','created_at','updated_at');
+        foreach($not_fillable_coloumn as $nfc){
+            if (($key = array_search($nfc, $coloumns)) !== false) {
+                unset($coloumns[$key]);
+            }
+        }
+        return view('resource.settings',['item'=>$studentdetails,'column'=>$coloumns]);
+    }
+
+    function showresourcePasswordReset(){
+        return view('resource.passwordreset');
+    }
+
+    function resourcePasswordReset(Request $request){
+        $this->validate($request, [
+            'password' => 'confirmed|min:6'
+        ]);
+        $studentid = session('user');//Crypt::decryptString($request->session()->get('student'));
+        $studentdetails = User::find($studentid);
+        $studentdetails->password = bcrypt($request->password);
+        $studentdetails->save();
+        return redirect('/resource/settings');
+    }
 }

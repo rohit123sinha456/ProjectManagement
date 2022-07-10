@@ -85,4 +85,8 @@ Route::prefix('resource')->group(function(){
     Route::post('/submittimesheetentry',[ResourceController::class,'submittimesheetentry'])->middleware('useraccess:resource');
     Route::post('/submiteffortestimate',[ResourceController::class,'submiteffortestimate'])->middleware('useraccess:resource');
 
+    Route::get('/settings', [ResourceController::class ,'showresourceSettings'])->middleware('useraccess:resource');
+    Route::get('/passwordreset', [ResourceController::class ,'showresourcePasswordReset'])->middleware('useraccess:resource');
+    Route::post('/passwordreset', [ResourceController::class ,'resourcePasswordReset'])->middleware('useraccess:resource');
+
 });

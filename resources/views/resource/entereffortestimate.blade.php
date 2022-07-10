@@ -1,7 +1,7 @@
 @include('layouts.header')
 
     <div class="container-scroller">
-        @include('layouts.topnav')
+        @include('resource.layouts.topnav')
     <div class="container-fluid page-body-wrapper">
     @include('resource.layouts.navbar')
         <div class="main-panel">

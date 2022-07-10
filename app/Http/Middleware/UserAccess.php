@@ -16,9 +16,13 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next,$userrole)
     {
-        if(auth()->user()->role === $userrole && $request->session()->has('user')){
-        return $next($request);}
+        if($request->session()->has('user')){
+            if(auth()->user()->role === $userrole){
+                return $next($request);
+            }
+            return redirect('/');
+        }
 
-        return response()->json([auth()->user()->role]);
+        return redirect('/');
     }
 }

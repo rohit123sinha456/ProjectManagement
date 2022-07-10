@@ -1,9 +1,4 @@
-@extends('layouts.header')
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @yield('header')
+@include('layouts.header')
     <div class="container-scroller">
         @include('layouts.topnav')
     <div class="container-fluid page-body-wrapper">

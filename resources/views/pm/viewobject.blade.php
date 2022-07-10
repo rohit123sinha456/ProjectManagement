@@ -1,9 +1,5 @@
-@extends('layouts.header')
-<!DOCTYPE html>
-<html lang="en">
+@include('layouts.header')
 
-<head>
-    @yield('header')
     <div class="container-scroller">
         @include('layouts.topnav')
     <div class="container-fluid page-body-wrapper">
@@ -18,6 +14,14 @@
                         <p class="card-description">
                          {{$item['description']}}
                         </p>
+
+                        <p>
+                          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"> Details</button>
+                          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2"> Effort Estimate</button>
+                        </p>
+                     
+                          
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">  
                         <div class="table-responsive">
                           <table class="table table-striped">
                             <thead>
@@ -45,6 +49,68 @@
                             </tbody>
                           </table>
                         </div>
+                            </div>
+                          
+                          
+
+
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                              @if ($estimate === null)
+                                  Create an extimate of the object
+                              @else
+                              <div class="table-responsive">
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>
+                                        Particulars
+                                      </th>
+                                      <th>
+                                        Details
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach ($estimatecols as $estcolname)
+                                  <tr>
+                                    <td>
+                                     {{$estcolname}}
+                                    </td>
+                                    <td>
+                                     {{$estimate[$estcolname]}}
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                    
+                                  </tbody>
+                                </table>
+                                
+                                @if ($item['state'] === 'running')
+                                <p class="card-description">
+                                  <div class="btn-group" role="group" aria-label="Basic example">
+                                    <form action="/pm/object/updatestatecomplete/{{$item['id']}}" method="GET"> <button type="submit" class="btn btn-outline-secondary btn-sm">Complete</button> </form>
+                                  </div>
+                                </p>
+                                @elseif ($item['state'] === 'reverted')
+                                <p class="card-description">
+                                  <div class="btn-group" role="group" aria-label="Basic example">
+                                    <form action="/pm/object/updatestaterunning/{{$item['id']}}" method="GET"> <button type="submit" class="btn btn-outline-secondary btn-sm">Accept</button> </form>
+                                    <form action="/pm/object/updatestaterejected/{{$item['id']}}" method="GET"> <button type="submit" class="btn btn-outline-secondary btn-sm">Reject</button> </form>
+                                  </div>
+                                </p>
+                                @else
+                                hello
+                                  @endif
+                              </div>
+
+
+                              @endif
+                            </div>
+                          
+                      
+
+
+
                       </div>
                     </div>
                   </div>

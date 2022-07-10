@@ -1,9 +1,4 @@
-@extends('layouts.header')
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @yield('header')
+@include('layouts.header')
     <div class="container-scroller">
         @include('layouts.topnav')
     <div class="container-fluid page-body-wrapper">
@@ -76,8 +71,9 @@
                                
                               </tr>
                               @endforeach
+                             
                             </tbody>
-                            <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value='Submit'>
+                            <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value='Submit' {{$entry->is_submitted == 1 ? 'disabled':''}}>
 
                           </table>
                           @endif

@@ -13,6 +13,8 @@ use App\Models\Client;
 use App\Models\User;
 use App\Models\ClientObject;
 use App\Models\ClientObjectRelations;
+use App\Models\EffortEstimation;
+
 use Illuminate\Support\Arr;
 
 
@@ -76,6 +78,7 @@ class ObjectController extends Controller
     }
 
     function showdetails($id){
+        //Fetching Object Details
         $clientobject = ClientObject::find($id);
         $clientobjectrelation = ClientObjectRelations::where('object_id',$clientobject->id)->get();
         $primary_resource = "";
@@ -95,7 +98,12 @@ class ObjectController extends Controller
         $objectdetails = Arr::add($clientobject, 'prname' , $primary_resource);
         $coloumns[count($coloumns)] = "srname";
         $objectdetails = Arr::add($clientobject, 'srname' , $secondary_resource);
-        return view('pm.viewobject',['item'=>$objectdetails,'column'=>$coloumns]);
+        //Fethcing Object TimeLine
+        $newestimate = EffortEstimation::where('object_id',$id)->first();
+        $estimatecols = Schema::getColumnListing('effortestimations');
+        
+        return view('pm.viewobject',['item'=>$objectdetails,'column'=>$coloumns,
+        'estimatecols'=>$estimatecols,'estimate'=>$newestimate]);
         //dd($secondary_resource);
         
     }

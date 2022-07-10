@@ -10,7 +10,11 @@ use App\Models\User;
 use App\Models\ClientObject;
 use App\Models\ClientObjectRelations;
 use App\Models\Timesheet;
+use App\Models\EffortEstimation;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 
 
 class ResourceController extends Controller
@@ -102,5 +106,75 @@ class ResourceController extends Controller
             }
         }
         return redirect("/resource/viewtimesheetentry");
+    }
+
+
+
+    function vieweffortestimation(){
+        $userid = session('user');
+        $entries = DB::table('objectsresources')->where([
+            ['user_id', '=', $userid],
+            ['is_primary', '=', 1],
+        ])->get();
+        $objectids = array();
+        foreach($entries as $entry){
+                array_push($objectids,$entry->object_id);
+        }
+        $uniqueobjectids = array_values(array_unique($objectids));
+        $objects = ClientObject::whereIn('id',$uniqueobjectids)->whereIn('state',[0])->get();
+        // dd($objects);
+        return view('resource.probjects',['entries'=>$objects]);
+
+    }
+
+    function filleffortestimation($id){
+        $estimate = EffortEstimation::where("object_id",$id)->first();
+        $coloumns = Schema::getColumnListing('effortestimations');
+        $not_fillable_coloumn = array('id','object_id','created_at','updated_at');
+        foreach($not_fillable_coloumn as $nfc){
+            if (($key = array_search($nfc, $coloumns)) !== false) {
+                unset($coloumns[$key]);
+            }
+        }
+        //dd($estimate);
+        if($estimate != null){
+        return view('resource.entereffortestimate',['item'=>$estimate,'column'=>$coloumns,'nodata'=>false,'oid'=>$id]);
+        }
+        else{
+        return view('resource.entereffortestimate',['item'=>$estimate,'column'=>$coloumns,'nodata'=>true,'oid'=>$id]);
+        }
+        dd($estimate);
+    }
+
+    function submiteffortestimate(Request $request){
+        $estimate = EffortEstimation::where('object_id',$request->oid)->first();
+        if($estimate == null){
+            $newestimate = new EffortEstimation;
+            $newestimate->A = $request->A;
+            $newestimate->B = $request->B;
+            $newestimate->C = $request->C;
+            $newestimate->D = $request->D;
+            $newestimate->E = $request->E;
+            $newestimate->object_id = $request->oid;
+            $newestimate->save();
+            $object = ClientObject::find($newestimate->object_id);
+            $object->state = 1;
+            $object->save();
+        }
+        else{
+            $newestimate = EffortEstimation::where('object_id',$request->oid)->first();
+            $newestimate->A = $request->A;
+            $newestimate->B = $request->B;
+            $newestimate->C = $request->C;
+            $newestimate->D = $request->D;
+            $newestimate->E = $request->E;
+            $newestimate->object_id = $request->oid;
+            $newestimate->save();
+            $object = ClientObject::find($newestimate->object_id);
+            $object->state = 1;
+            $object->save();
+
+        }
+        return redirect('/resource/vieweffortestimation');
     }
 }

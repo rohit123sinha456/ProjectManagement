@@ -71,18 +71,18 @@ Route::prefix('pm')->group(function () {
 });
 
 Route::prefix('resource')->group(function(){
-    Route::post('/login',[ResourceLogin::class,'login']);
     Route::get('/dashboard',[ResourceLogin::class,'index'])->middleware('useraccess:resource');
     Route::get('/timesheetselectdate',[ResourceController::class,'selectdate'])->middleware('useraccess:resource');
-    Route::post('/selecteddate',[ResourceController::class,'viewtimesheet'])->middleware('useraccess:resource');
-    Route::get('/selecteddate',function(){
-        return redirect('/resource/timesheetselectdate');
-    })->middleware('useraccess:resource');
-    Route::post('/submittimesheet',[ResourceController::class,'submittimesheet'])->middleware('useraccess:resource');
     Route::get('/viewtimesheetentry',[ResourceController::class,'viewtimesheetentry'])->middleware('useraccess:resource');
-    Route::post('/viewtimesheetentry',[ResourceController::class,'viewtimesheetentry'])->middleware('useraccess:resource');
-    Route::post('/submittimesheetentry',[ResourceController::class,'submittimesheetentry'])->middleware('useraccess:resource');
-
     Route::get('/vieweffortestimation',[ResourceController::class,'vieweffortestimation'])->middleware('useraccess:resource');
+    Route::get('/filleffortestimation/{id}',[ResourceController::class,'filleffortestimation'])->middleware('useraccess:resource');
+    Route::get('/selecteddate',function(){return redirect('/resource/timesheetselectdate');})->middleware('useraccess:resource');
+    
+    Route::post('/login',[ResourceLogin::class,'login']);
+    Route::post('/viewtimesheetentry',[ResourceController::class,'viewtimesheetentry'])->middleware('useraccess:resource');
+    Route::post('/selecteddate',[ResourceController::class,'viewtimesheet'])->middleware('useraccess:resource');
+    Route::post('/submittimesheet',[ResourceController::class,'submittimesheet'])->middleware('useraccess:resource');
+    Route::post('/submittimesheetentry',[ResourceController::class,'submittimesheetentry'])->middleware('useraccess:resource');
+    Route::post('/submiteffortestimate',[ResourceController::class,'submiteffortestimate'])->middleware('useraccess:resource');
 
 });

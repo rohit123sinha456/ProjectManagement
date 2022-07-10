@@ -65,7 +65,13 @@
                             
                                 <td>
                                   <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control" id="hours" name="hours[]" value={{$entry->hours}} {{$entry->is_submitted == 1 ? 'disabled':''}}>
+                                    @if ($entry->is_submitted == 1)
+                                    <label>{{$entry->hours}}</label>
+                                    <input type="hidden" class="form-control" id="hours" name="hours[]" value={{$entry->hours}}>
+                                    @else
+                                    <input type="text" class="form-control" id="hours" name="hours[]" value={{$entry->hours}}>
+                                        
+                                    @endif
                                   </div>
                                 </td>
                                

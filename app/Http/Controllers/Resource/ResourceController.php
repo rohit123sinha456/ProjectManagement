@@ -98,6 +98,7 @@ class ResourceController extends Controller
     function submittimesheetentry(Request $request){
         $timesheets = Timesheet::find($request->tsid);
         $datalength = count($timesheets->toArray());
+        // dd($request->input());
         for($i=0;$i<$datalength;$i++){
             if($timesheets[$i]->is_submitted == 0){
             $timesheets[$i]->hours = $request->hours[$i];

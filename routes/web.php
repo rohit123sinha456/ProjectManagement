@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminLogin;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminResourceController;
 use App\Http\Controllers\Admin\AdminResourceControllerUtil;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Pm\PmLogin;
 use App\Http\Controllers\Pm\ObjectController;
 use App\Http\Controllers\Resource\ResourceLogin;
@@ -52,6 +53,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('clients',AdminClientController::class)->middleware('useraccess:admin');
     Route::resource('resources',AdminResourceController::class)->middleware('useraccess:admin');
     Route::post('update/resources/{id}',[AdminResourceControllerUtil::class,'updateresource'])->middleware('useraccess:admin');
+    Route::get('/selecteddate',[AdminController::class,'viewselectdate'])->middleware('useraccess:admin');
+    Route::post('/selecteddate',[AdminController::class,'showcharts'])->middleware('useraccess:admin');
 
 });
 

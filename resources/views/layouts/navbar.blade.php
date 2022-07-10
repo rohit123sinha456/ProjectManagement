@@ -34,5 +34,13 @@
           </ul>
         </div>
       </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/selecteddate">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Analysis</span>
+        </a>
+      </li>
     </ul>
   </nav>

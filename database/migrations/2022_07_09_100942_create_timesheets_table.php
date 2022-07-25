@@ -20,7 +20,9 @@ class CreateTimesheetsTable extends Migration
             $table->unsignedBigInteger('object_id');
             $table->foreign('object_id')->references('id')->on('objects');
             $table->double('hours');
-            $table->enum('sdlcstep', ['A','B','C','D','E']);
+            // $table->unsignedBigInteger('sdlcstep');
+            // $table->foreign('sdlcstep')->references('id')->on('sdlc');
+            $table->string('sdlcstep',10);
             $table->date('date');
             $table->boolean('is_submitted');
             $table->timestamps();

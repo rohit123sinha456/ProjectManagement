@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EffortEstimation extends Model
+class SDLC extends Model
 {
     use HasFactory;
-    protected $table = 'effortestimations';
-
+    protected $table = 'sdlc';
     protected $fillable = [
-        'object_id',
-        'sdlcstep',
-        'hours'
+        'name',
+        'description'
     ];
 }

@@ -9,36 +9,52 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">{{$item['name']}} </h4>
+                        <h4 class="card-title">SDLC Stages</h4>
                         <p class="card-description">
-                         {{$item['description']}}
+                         Put in SDLC Stages
                         </p>
+                        <a href="/admin/sdlc/create"> <button type="submit" class="btn btn-outline-secondary btn-sm">Create</button> </a>
+
                         <div class="table-responsive">
-                          <table class="table table-striped">
+
+                          <table class="table table-striped"  id="emptbl">
                             <thead>
                               <tr>
                                 <th>
-                                  Particulars
+                                  SDLC Acrynym
                                 </th>
                                 <th>
-                                  Details
+                                  Short Description
                                 </th>
+                                
                               </tr>
                             </thead>
                             <tbody>
-                            @foreach ($column as $colname)
+                            @if(count($sdlc) == 0)
                             <tr>
-                              <td>
-                               {{$colname}}
-                              </td>
-                              <td>
-                               {{$item[$colname]}}
-                              </td>
+                               <label>No Data Found</label>
                             </tr>
-                            @endforeach
+                            @else
+                                @foreach($sdlc as $item)
+                                <tr>
+                                <td  id="col0">
+                                    <label>{{$item->name}}</label>
+                                  </td>
+                                <td  id="col1">
+                                    <label>{{$item->description}}</label>
+                                </td>
+                                </tr>
+                                @endforeach
+                            @endif
                               
                             </tbody>
                           </table>
+                     
+                          @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div>{{$error}}</div>
+                            @endforeach
+                        @endif
                         </div>
                       </div>
                     </div>

@@ -25,6 +25,7 @@ class ResourceController extends Controller
 
     function viewtimesheet(Request $request){
         $coloumns = Timesheet::getPossibleStatuses();
+        //dd($coloumns);
         $issubmit = 0;
         $userid = session('user');
         $clientobjects = ClientObjectRelations::where('user_id',$userid)->get();
@@ -130,7 +131,7 @@ class ResourceController extends Controller
 
     function filleffortestimation($id){
         $estimate = EffortEstimation::where("object_id",$id)->first();
-        $coloumns = Schema::getColumnListing('effortestimations');
+        $coloumns = Timesheet::getPossibleStatuses();//Schema::getColumnListing('effortestimations');
         $not_fillable_coloumn = array('id','object_id','created_at','updated_at');
         foreach($not_fillable_coloumn as $nfc){
             if (($key = array_search($nfc, $coloumns)) !== false) {
@@ -149,29 +150,29 @@ class ResourceController extends Controller
 
     function submiteffortestimate(Request $request){
         $estimate = EffortEstimation::where('object_id',$request->oid)->first();
+        $coloumns = Timesheet::getPossibleStatuses();
         if($estimate == null){
-            $newestimate = new EffortEstimation;
-            $newestimate->A = $request->A;
-            $newestimate->B = $request->B;
-            $newestimate->C = $request->C;
-            $newestimate->D = $request->D;
-            $newestimate->E = $request->E;
-            $newestimate->object_id = $request->oid;
-            $newestimate->save();
-            $object = ClientObject::find($newestimate->object_id);
+            foreach($coloumns as $cols){
+                $newestimate = new EffortEstimation;
+                $newestimate->sdlcstep = $cols;
+                $newestimate->hours = $request->$cols;
+                $newestimate->object_id = $request->oid;
+                $newestimate->save();
+            }
+            
+            $object = ClientObject::find($request->oid);
             $object->state = 1;
             $object->save();
         }
         else{
-            $newestimate = EffortEstimation::where('object_id',$request->oid)->first();
-            $newestimate->A = $request->A;
-            $newestimate->B = $request->B;
-            $newestimate->C = $request->C;
-            $newestimate->D = $request->D;
-            $newestimate->E = $request->E;
-            $newestimate->object_id = $request->oid;
-            $newestimate->save();
-            $object = ClientObject::find($newestimate->object_id);
+            foreach($coloumns as $cols){
+                $newestimate = EffortEstimation::where('object_id',$request->oid)->where('sdlcstep',$cols)->first();
+                $newestimate->sdlcstep = $cols;
+                $newestimate->hours = $request->$cols;
+                $newestimate->object_id = $request->oid;
+                $newestimate->save();
+            }
+            $object = ClientObject::find($request->oid);
             $object->state = 1;
             $object->save();
 

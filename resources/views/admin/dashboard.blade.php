@@ -3,7 +3,7 @@
     <div class="container-scroller">
         @include('layouts.topnav')
     <div class="container-fluid page-body-wrapper">
-    @include('pm.layouts.navbar')
+    @include('layouts.navbar')
         <div class="main-panel">
             <div class="content-wrapper">
               <div class="row">
@@ -48,7 +48,7 @@
                       <div class="card card-dark-blue">
                         <div class="card-body">
                           <p class="mb-4">Total Objects</p>
-                          <p class="fs-30 mb-2">{{$obcount}}</p>
+                          <p class="fs-30 mb-2">{{$objects}}</p>
                           
                         </div>
                       </div>
@@ -58,8 +58,8 @@
                     <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                       <div class="card card-light-blue">
                         <div class="card-body">
-                          <p class="mb-4">Total Primary Resources</p>
-                          <p class="fs-30 mb-2">-</p>
+                          <p class="mb-4">Total Resources</p>
+                          <p class="fs-30 mb-2">{{$users}}</p>
                           
                         </div>
                       </div>
@@ -67,7 +67,7 @@
                     <div class="col-md-6 stretch-card transparent">
                       <div class="card card-light-danger">
                         <div class="card-body">
-                          <p class="mb-4">Total Secondary Resource</p>
+                          <p class="mb-4">A Metric of Choice</p>
                           <p class="fs-30 mb-2">-</p>
                           
                         </div>

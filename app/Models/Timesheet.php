@@ -19,11 +19,17 @@ class Timesheet extends Model
         'is_submitted',
     ];
     public static function getPossibleStatuses(){
-        $type = DB::select(DB::raw('SHOW COLUMNS FROM timesheets WHERE Field = "sdlcstep"'))[0]->Type;
-        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        // $type = DB::select(DB::raw('SHOW COLUMNS FROM timesheets WHERE Field = "sdlcstep"'))[0]->Type;
+        // preg_match('/^enum\((.*)\)$/', $type, $matches);
+        // $values = array();
+        // foreach(explode(',', $matches[1]) as $value){
+        //     $values[] = trim($value, "'");
+        // }
+        // return $values;
+        $sdlcstage = DB::table('sdlc')->select('name')->get();
         $values = array();
-        foreach(explode(',', $matches[1]) as $value){
-            $values[] = trim($value, "'");
+        foreach($sdlcstage as $value){
+            $values[] = trim($value->name, "'");
         }
         return $values;
     }

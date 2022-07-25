@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEffortestimationsTable extends Migration
+class CreateSdlcTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateEffortestimationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('effortestimations', function (Blueprint $table) {
+        Schema::create('sdlc', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('object_id');
-            $table->foreign('object_id')->references('id')->on('objects');
-            $table->string('sdlcstep',10);
-            $table->double('hours');
+            $table->string('name', 10);
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateEffortestimationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('effortestimations');
+        Schema::dropIfExists('sdlc');
     }
 }

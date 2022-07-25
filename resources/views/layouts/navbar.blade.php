@@ -2,7 +2,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="/admin/login">
+        <a class="nav-link" href="/admin/dashboard">
           <i class="icon-grid menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
@@ -30,9 +30,15 @@
         <div class="collapse" id="students">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"><a class="nav-link" href="/admin/resources">All Resources</a></li>
-            
           </ul>
         </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/sdlc">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">SDLC Stages</span>
+        </a>
       </li>
 
 

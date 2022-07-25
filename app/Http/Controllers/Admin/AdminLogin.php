@@ -9,14 +9,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Client;
+use App\Models\User;
+use App\Models\ClientObject;
 
 
 
 class AdminLogin extends Controller
 {
     function index(){
+        $pmid = session('user');
+        $name = User::find($pmid);
+        $allusers = User::all();
         $clients = Client::all();
-        return view('admin.clients',['clients'=>$clients]);
+        $objects = ClientObject::all();
+        return view('admin.dashboard',['name'=>$name->name,'client'=>count($clients),'objects'=>count($objects),'users'=>count($allusers)]);
     }
    
     function login(Request $request){

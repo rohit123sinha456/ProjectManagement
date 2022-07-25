@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminLogin;
+use App\Http\Controllers\Admin\AdminSdlcController;
 use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminResourceController;
 use App\Http\Controllers\Admin\AdminResourceControllerUtil;
@@ -50,6 +51,9 @@ Route::get('/logout',function(Request $request){
 Route::group(['prefix'=>'admin'],function(){
     Route::post('/login', [AdminLogin::class,'login']);
     Route::get('/dashboard',[AdminLogin::class,'index'])->middleware('useraccess:admin');
+    Route::get('/sdlc',[AdminSdlcController::class,'index'])->middleware('useraccess:admin');
+    Route::get('/sdlc/create',[AdminSdlcController::class,'create'])->middleware('useraccess:admin');
+    Route::post('/sdlc',[AdminSdlcController::class,'update'])->middleware('useraccess:admin');
     Route::resource('clients',AdminClientController::class)->middleware('useraccess:admin');
     Route::resource('resources',AdminResourceController::class)->middleware('useraccess:admin');
     Route::post('update/resources/{id}',[AdminResourceControllerUtil::class,'updateresource'])->middleware('useraccess:admin');

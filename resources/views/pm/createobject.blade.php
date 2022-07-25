@@ -19,10 +19,16 @@
                           <div class="form-group">
                             <label for="exampleInputName1">Name</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Name">
+                            @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail3">Description</label>
                             <textarea type="text" class="form-control" id="content" name="content" placeholder="Description"></textarea>
+                            @error('content')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                           </div>
                           
                           <div class="form-group">
@@ -38,6 +44,9 @@
                                 <option value={{$item->id}}>{{$item->name}}</option>
                                 @endforeach
                             </select>
+                            @error('prid')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                           </div>
                           <div class="form-group">
                             <label>Secondary Resource</label>
@@ -48,8 +57,9 @@
                             </select>
                           </div>
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                          <button class="btn btn-light">Cancel</button>
+                          <button class="btn btn-light"  onclick="history.back()">Cancel</button>
                         </form>
+                        
                       </div>
                     </div>
                   </div>
@@ -59,8 +69,8 @@
             <footer class="footer">
               <script src="{{  asset('js/select2.js')}}"></script>
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i> by RS</span>
               </div>
             </footer>
             <!-- partial -->

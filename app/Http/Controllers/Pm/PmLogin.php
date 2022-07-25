@@ -12,12 +12,19 @@ use App\Models\Client;
 use App\Models\ClientObject;
 use App\Models\ClientObjectRelations;
 use App\Models\ClientResources;
+use App\Models\User;
 
 
 class PmLogin extends Controller
 {
 function index(){
-    return view('pm.dashboard');
+    $pmid = session('user');
+    $name = User::find($pmid);
+    $pm_clients = ClientResources::where('user_id',$pmid)->get();
+    $clientcount = count($pm_clients->groupBy('user_id'));
+    $objectids = ClientObjectRelations::where('user_id',$pmid)->get();
+    //dd(count($objectids));
+    return view('pm.dashboard',['name'=>$name->name,'client'=>$clientcount,'obcount'=>count($objectids)]);
 }
 
     function login(Request $request){

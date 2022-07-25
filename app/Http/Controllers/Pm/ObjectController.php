@@ -9,11 +9,13 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\ClientObject;
 use App\Models\ClientObjectRelations;
 use App\Models\EffortEstimation;
+use App\Models\Timesheet;
 
 use Illuminate\Support\Arr;
 
@@ -26,6 +28,13 @@ class ObjectController extends Controller
         //dd($id);
     }
     function create(Request $request){
+        $request->validate([
+            'title'   => 'required',
+            'content' => 'required',
+            'prid' => 'required',
+        ]);
+        
+
         $cobject = new ClientObject;
         $cobject->name = $request->title;
         $cobject->description = $request->content;
@@ -99,8 +108,9 @@ class ObjectController extends Controller
         $coloumns[count($coloumns)] = "srname";
         $objectdetails = Arr::add($clientobject, 'srname' , $secondary_resource);
         //Fethcing Object TimeLine
-        $newestimate = EffortEstimation::where('object_id',$id)->first();
-        $estimatecols = Schema::getColumnListing('effortestimations');
+        $newestimate = EffortEstimation::where('object_id',$id)->get();
+        //dd($newestimate[0]->hours);
+        $estimatecols = Timesheet::getPossibleStatuses();//Schema::getColumnListing('effortestimations');
         
         return view('pm.viewobject',['item'=>$objectdetails,'column'=>$coloumns,
         'estimatecols'=>$estimatecols,'estimate'=>$newestimate]);

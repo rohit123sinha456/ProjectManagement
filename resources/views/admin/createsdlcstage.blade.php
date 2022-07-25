@@ -14,25 +14,19 @@
                         <p class="card-description">
                           Put in the name and description of the clients
                         </p>
-                        <form class="forms-sample" action="/admin/resources" method="POST">
+                        <form class="forms-sample" action="/admin/sdlc" method="POST">
                             @csrf
                           <div class="form-group">
                             <label for="exampleInputName1">Name</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Name">
+                            <input type="text" class="form-control" id="acrnym" name="acrnym" placeholder="Name">
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail3">Content</label>
-                            <textarea type="text" class="form-control" id="content" name="content" placeholder="Description"></textarea>
+                            <label for="exampleInputEmail3">Description</label>
+                            <input type="text" class="form-control" id="desc" name="desc" placeholder="Name">
+
                           </div>
                           
-                          <div class="form-group">
-                            <label for="exampleFormControlSelect1">Project Manager</label>
-                            <select class="form-control form-control-lg" id="pmid" name="pmid">
-                                @foreach ($pm as $item)
-                                <option value={{$item['id']}}>{{$item['name']}}</option>
-                                @endforeach
-                            </select>
-                          </div>
+                        
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
                           <button class="btn btn-light">Cancel</button>
                         </form>

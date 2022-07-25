@@ -84,13 +84,21 @@
         content: {
           element: "input",
           attributes: {
-            placeholder: "Type your password",
-            type: "password",
+            name:"acrynm",
+            placeholder: "SDLC Acronym",
+            type: "text",
+            class: 'form-control'
+          },
+          element: "input",
+          attributes: {
+            name:"desc",
+            placeholder: "SDLC Description",
+            type: "text",
             class: 'form-control'
           },
         },
         button: {
-          text: "OK",
+          text: "Submit",
           value: true,
           visible: true,
           className: "btn btn-primary"

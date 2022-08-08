@@ -1,4 +1,22 @@
 @include('layouts.header')
+<script type="text/javascript">
+      window.onload = function(){
+      date = new Date();
+      year = date.getFullYear();
+      month = date.getMonth() + 1;
+      day = date.getDate();
+      if (day < 10) {
+        day = '0' + day;
+      }
+      if (month < 10) {  
+        month = '0' + month;
+      } 
+        
+    today = year + '-' + month + '-' + day; 
+    console.log(today);
+    document.getElementById('date').setAttribute('max',today);
+    }
+</script>
     <div class="container-scroller">
         @include('resource.layouts.topnav')
     <div class="container-fluid page-body-wrapper">

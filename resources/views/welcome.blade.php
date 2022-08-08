@@ -9,7 +9,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Project Management System</h4>
-                  <p class="card-description">Add class <code>.btn-block</code></p>
+                  <p class="card-description">Datacore</p>
                   <div class="template-demo">
                     <a type="button" href="/admin" class="btn btn-outline-secondary btn-lg btn-block">Admin Login</a>
                     <a type="button" href="/pm" class="btn btn-outline-secondary btn-lg btn-block">PM Login</a>

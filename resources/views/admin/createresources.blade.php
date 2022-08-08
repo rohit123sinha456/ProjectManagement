@@ -10,9 +10,9 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Create Clients</h4>
+                        <h4 class="card-title">Create Resources</h4>
                         <p class="card-description">
-                          Put in the name and description of the clients
+                          Put in the name and description of the resouces
                         </p>
                         <form class="forms-sample" action="/admin/resources" method="POST">
                             @csrf
@@ -21,8 +21,8 @@
                             <input type="text" class="form-control" id="title" name="title" placeholder="Name">
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail3">Content</label>
-                            <textarea type="text" class="form-control" id="content" name="content" placeholder="Description"></textarea>
+                            <label for="exampleInputEmail3">Email</label>
+                            <input type="text" class="form-control" id="content" name="content" placeholder="Email">
                           </div>
                           
                           <div class="form-group">

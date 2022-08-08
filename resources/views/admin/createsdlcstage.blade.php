@@ -10,9 +10,9 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Create Clients</h4>
+                        <h4 class="card-title">Create SDLC</h4>
                         <p class="card-description">
-                          Put in the name and description of the clients
+                          Put in the name and description of the SDLC
                         </p>
                         <form class="forms-sample" action="/admin/sdlc" method="POST">
                             @csrf

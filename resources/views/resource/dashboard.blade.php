@@ -1,11 +1,21 @@
 @include('layouts.header')
-<script>  
+<script>
+  function getDaysInMonth(year, month) {
+  return new Date(year, month, 0).getDate();
+}
 window.onload = function(){
   date = new Date();
   year = date.getFullYear();
   month = date.getMonth() + 1;
   day = date.getDate();
+  working_days = getDaysInMonth(year,month);
   document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+  let dateToday = new Date();
+  let lastDayOfMonth = new Date(dateToday.getFullYear(), dateToday.getMonth()+1, 0).getDate();
+  let daysUntilEndOfMonth = lastDayOfMonth - dateToday.getDate();
+  document.getElementById("twh").innerHTML = 160;
+  document.getElementById("twhp").innerHTML = "("+lastDayOfMonth+" days )";
+  document.getElementById('hwp').innerHTML = {{$filledhours}}/160 * 100 + "% hours clocked "
 }
   </script>
     <div class="container-scroller">
@@ -18,7 +28,7 @@ window.onload = function(){
                 <div class="col-md-12 grid-margin">
                   <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                      <h3 class="font-weight-bold">Welcome Resource</h3>
+                      <h3 class="font-weight-bold">Welcome {{$name}}</h3>
                       <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
                     </div>
                     <div class="col-12 col-xl-4">
@@ -27,7 +37,6 @@ window.onload = function(){
                         <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                           <i class="mdi mdi-calendar" id="current_date"></i>
                         </button>
-                        
                       </div>
                      </div>
                     </div>
@@ -39,14 +48,7 @@ window.onload = function(){
                   <div class="card tale-bg">
                     <div class="card-people mt-auto">
                       <img src="{{asset('images/admindash.svg')}}" alt="people">
-                      <div class="weather-info">
-                        <div class="d-flex">
-                          <div class="ml-2">
-                            <h4 class="location font-weight-normal">Welcome</h4>
-                            <h6 class="font-weight-normal">Admin</h6>
-                          </div>
-                        </div>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>
@@ -55,18 +57,18 @@ window.onload = function(){
                     <div class="col-md-6 mb-4 stretch-card transparent">
                       <div class="card card-tale">
                         <div class="card-body">
-                          <p class="mb-4">Total Courses</p>
-                          <p class="fs-30 mb-2">hh</p>
-                          <p>10.00% (30 days)</p>
+                          <p class="mb-4">Total Clocked Hours</p>
+                          <p class="fs-30 mb-2">{{$filledhours}}</p>
+                          <p id="hwp"></p>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4 stretch-card transparent">
                       <div class="card card-dark-blue">
                         <div class="card-body">
-                          <p class="mb-4">Total Teachers</p>
-                          <p class="fs-30 mb-2">hi</p>
-                          <p>22.00% (30 days)</p>
+                          <p class="mb-4">Total Working Hours</p>
+                          <p class="fs-30 mb-2" id="twh"></p>
+                          <p id="twhp"></p>
                         </div>
                       </div>
                     </div>

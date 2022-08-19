@@ -27,6 +27,8 @@ services:
         SERVICE_NAME: mysql
       volumes:
         - ./mysql:/docker-entrypoint-initdb.d
+      ports:
+        - 33061:3306
       networks:
         - travellist
   nginx:

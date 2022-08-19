@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminResourceController;
 use App\Http\Controllers\Admin\AdminResourceControllerUtil;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminDetailsAnalysis;
 use App\Http\Controllers\Pm\PmLogin;
 use App\Http\Controllers\Pm\ObjectController;
 use App\Http\Controllers\Resource\ResourceLogin;
@@ -59,7 +60,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('update/resources/{id}',[AdminResourceControllerUtil::class,'updateresource'])->middleware('useraccess:admin');
     Route::get('/selecteddate',[AdminController::class,'viewselectdate'])->middleware('useraccess:admin');
     Route::post('/selecteddate',[AdminController::class,'showcharts'])->middleware('useraccess:admin');
+    Route::get('/detailsummary/selectclientandobject',[AdminDetailsAnalysis::class,'viewselectclient'])->middleware('useraccess:admin');
+    Route::post('/detailsummary/analysis',[AdminDetailsAnalysis::class,'analysis'])->middleware('useraccess:admin');
 
+    
 });
 
 Route::prefix('pm')->group(function () {

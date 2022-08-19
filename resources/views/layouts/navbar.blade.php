@@ -48,5 +48,13 @@
           <span class="menu-title">Analysis</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/detailsummary/selectclientandobject">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Details Analysis</span>
+        </a>
+      </li>
+
     </ul>
   </nav>

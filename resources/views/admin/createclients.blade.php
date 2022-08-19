@@ -19,10 +19,16 @@
                           <div class="form-group">
                             <label for="exampleInputName1">Name</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Name">
+                            @if($errors->has('title'))
+                                <div class="error">{{ $errors->first('title') }}</div>
+                            @endif
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail3">Content</label>
                             <textarea type="text" class="form-control" id="content" name="content" placeholder="Description"></textarea>
+                            @if($errors->has('content'))
+                                <div class="error">{{ $errors->first('content') }}</div>
+                            @endif
                           </div>
                           
                           <div class="form-group">
@@ -32,6 +38,9 @@
                                 <option value={{$item->id}}>{{$item->name}}</option>
                                 @endforeach
                             </select>
+                            @if($errors->has('pmid'))
+                                <div class="error">{{ $errors->first('pmid') }}</div>
+                            @endif
                           </div>
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
                           <button class="btn btn-light">Cancel</button>

@@ -9,6 +9,7 @@ use App\Models\SDLC;
 use App\Models\ClientResources;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminSdlcController extends Controller
 {
@@ -29,7 +30,7 @@ class AdminSdlcController extends Controller
             'desc' => 'required',
         ]);
         if ($validator->fails()) {
-            return self::index()->withErrors($validator->errors());
+            return Redirect::back()->withErrors($validator->errors());
         }
         //dd($request->input());
 

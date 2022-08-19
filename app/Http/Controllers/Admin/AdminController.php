@@ -58,7 +58,64 @@ class AdminController extends Controller
             // dd($co[0]->cname);
         }
         // dd($names);
-        return view('admin.analysis',['uid'=>$uid,'uhours'=>$userhours,'names'=>$names,'ocount'=>$ocount]);
+        //SELECT objects.name,SUM(effortestimations.hours) FROM effortestimations,objects where objects.id=effortestimations.object_id  GROUP BY object_id;
+        // Calculating the estimated hours of the objects
+        $objectestimatedhoursdb = DB::table('effortestimations')
+        ->join('objects','objects.id','=','effortestimations.object_id')
+        ->select('objects.id as oid','objects.name as oname','effortestimations.hours as esthrs')
+        ->whereIn('objects.state', [2, 3])
+        ->get();
+        $groupbyresult = $objectestimatedhoursdb->groupBy('oid');
+        $objectestimatedhours = $groupbyresult->map(function ($group) {
+            return [
+                'oid'=>$group[0]->oid,
+                'oname'=>$group[0]->oname,
+                'hours'=>$group->sum('esthrs')];
+        });
+        $estoname = array();
+        $esthours = array();
+        $flag = 0;
+        foreach($objectestimatedhours as $co){
+            $estoname[$flag] = $co['oname']; // giving erro if we put cname(Client Name) -> address it
+            $esthours[$flag] = $co['hours'];
+            $flag = $flag + 1;
+            // dd($co[0]->cname);
+        }
+        //SELECT objects.name,SUM(timesheets.hours) from timesheets,objects where objects.id=timesheets.object_id GROUP by object_id;
+        $objectefforthoursdb = DB::table('timesheets')
+        ->join('objects','objects.id','=','timesheets.object_id')
+        ->select('objects.id as oid','objects.name as oname','timesheets.hours as esthrs')
+        ->whereIn('objects.state', [2, 3])
+        ->get();
+        $groupbyresult = $objectefforthoursdb->groupBy('oid');
+        $objectefforthours = $groupbyresult->map(function ($group) {
+            return [
+                'oid'=>$group[0]->oid,
+                'oname'=>$group[0]->oname,
+                'hours'=>$group->sum('esthrs')];
+        });
+        $effortoname = array();
+        $efforthours = array();
+        $flag = 0;
+        foreach($objectefforthours as $co){
+            $effortoname[$flag] = $co['oname']; // giving erro if we put cname(Client Name) -> address it
+            $efforthours[$flag] = $co['hours'];
+            $flag = $flag + 1;
+            // dd($co[0]->cname);
+        }
+        $maxobjectcount = max(count($efforthours),count($objectestimatedhours));
+
+        //dd($effort);
+
+
+
+        return view('admin.analysis',[
+            
+            'names'=>$names,'ocount'=>$ocount,
+            "effortname"=>$effortoname, "efforthours"=>$efforthours,
+            "estimatename"=>$estoname, "estimatehours"=>$esthours
+
+    ]);
         //dd($userhours);
     }
 

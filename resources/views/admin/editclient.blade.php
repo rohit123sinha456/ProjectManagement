@@ -10,28 +10,39 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Create SDLC</h4>
+                        <h4 class="card-title">Edit Client</h4>
                         <p class="card-description">
-                          Put in the name and description of the SDLC
+                          Put in the name and description of the clients
                         </p>
-                        <form class="forms-sample" action="/admin/sdlc" method="POST">
+                        <form class="forms-sample" action="/admin/clients/{{$clientinfo['id']}}" method="POST">
+                            @method('PUT')
                             @csrf
                           <div class="form-group">
                             <label for="exampleInputName1">Name</label>
-                            <input type="text" class="form-control" id="acrnym" name="acrnym" placeholder="Name">
-                            @if($errors->has('acrnym'))
-                                <div class="error">{{ $errors->first('acrnym') }}</div>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Name" value="{{$clientinfo['name']}}">
+                            @if($errors->has('title'))
+                                <div class="error">{{ $errors->first('title') }}</div>
                             @endif
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail3">Description</label>
-                            <input type="text" class="form-control" id="desc" name="desc" placeholder="Name">
-                            @if($errors->has('desc'))
-                                <div class="error">{{ $errors->first('desc') }}</div>
+                            <label for="exampleInputEmail3">Content</label>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="description" value="{{$clientinfo['description']}}"/>
+                            @if($errors->has('description'))
+                                <div class="error">{{ $errors->first('description') }}</div>
                             @endif
                           </div>
                           
-                        
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1">Project Manager</label>
+                            <select class="form-control form-control-lg" id="pmid" name="pmid">
+                                @foreach ($allusers as $item)
+                                <option value={{$item->id}} {{ ($pminfo->id == $item->id ? "selected":"") }}>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('pmid'))
+                                <div class="error">{{ $errors->first('pmid') }}</div>
+                            @endif
+                          </div>
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
                           <button class="btn btn-light">Cancel</button>
                         </form>

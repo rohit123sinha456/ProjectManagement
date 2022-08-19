@@ -1,22 +1,33 @@
 @include('layouts.header')
 <script>
-
+ 
   $(function() {
   /* ChartJS
    * -------
    * Data and config for chartjs
    */
-  'use strict';
-  var data = {
-    labels: {{ json_encode($uid) }},
-    datasets: [{
-      label: '# of Hours',
-      data: {{ json_encode($uhours) }},
-      borderWidth: 1,
-      fill: false
-    }]
-  };
+  var effortname = @json($effortname);
+  var efforthours =  @json($efforthours);
+  var effortdata = effortname.map((name,index)=>{
+      let data = {};
+      data.name = name;
+      data.hours = {};
+      data.hours.value = efforthours[index];
+      return data;
+  });
+  
+  var estimatename = @json($estimatename);
+  var estimatehours =  @json($estimatehours);
+  var estimatedata = estimatename.map((name,index)=>{
+      let data = {};
+      data.name = name;
+      data.hours = {};
+      data.hours.value = estimatehours[index];
+      return data;
+  });
 
+
+  'use strict';
   var data1 = {
     labels:  @json($names),
     datasets: [{
@@ -52,8 +63,28 @@
     // This will get the first returned node in the jQuery collection.
     var barChart = new Chart(barChartCanvas, {
       type: 'bar',
-      data: data,
-      options: options
+      data: {
+          datasets: [{
+            label : "Estimate",
+              data: estimatedata,
+              backgroundColor: 'rgba(75,190,190,0.2)',
+              parsing: {
+              xAxisKey: 'name',
+              yAxisKey: 'hours.value'
+          }
+          },
+          {
+            label : "Effort",
+              data: effortdata,
+              backgroundColor: 'rgba(75,100,100,0.2)',
+              parsing: {
+              xAxisKey: 'name',
+              yAxisKey: 'hours.value'
+          }
+          }
+        ]
+      },
+      
     });
   }
 
@@ -81,7 +112,7 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Working Hours for Users</h4>
+                  <h4 class="card-title">Effort Vs Estimate Hours of Objects</h4>
                   <canvas id="barChart1"></canvas>
                 </div>
               </div>

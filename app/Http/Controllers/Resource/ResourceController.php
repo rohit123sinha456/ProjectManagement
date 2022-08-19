@@ -34,8 +34,8 @@ class ResourceController extends Controller
             array_push($object_client_id,$oc->object_id);
         }
         $object_client_ids = array_values(array_unique($object_client_id));
-        $objects = ClientObject::whereIn('id',$object_client_ids)->get();
-        //chain in a where cluse to show objects that are in running state
+        $objects = ClientObject::whereIn('id',$object_client_ids)->where('state',2)->get();
+        //chain in a where cluse to show objects that are in running state[DONE]
         $selecteddate = $request->date;
         //https://www.etutorialspoint.com/index.php/11-dynamically-add-delete-html-table-rows-using-javascript
         return view('resource.entrytimesheet',['column'=>$coloumns,'issubmit'=>$issubmit,'objects'=>$objects,'dateselected'=>true,'date'=>$selecteddate]);

@@ -27,7 +27,8 @@
     <script src="{{  asset('vendors/js/vendor.bundle.base.js')}}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="{{  asset('vendors/chart.js/Chart.min.js')}}"></script>
+  <script src=" {{ asset('vendors/chart.js/chart.min.js') }}"></script>
+  <!--script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script-->
   <script src="{{  asset('vendors/datatables.net/jquery.dataTables.js')}}"></script>
   <script src="{{  asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
   <script src="{{  asset('vendors/select2/select2.min.js')}}"></script>

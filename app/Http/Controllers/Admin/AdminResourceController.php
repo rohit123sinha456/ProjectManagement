@@ -54,6 +54,7 @@ class AdminResourceController extends Controller
     {
         $user = User::find($id);
         $coloumns = Schema::getColumnListing('users');
+        // dd($coloumns);
         return view('admin.viewclients',['item'=>$user,'column'=>$coloumns]);
     }
 
@@ -66,7 +67,7 @@ class AdminResourceController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $pm = [['id'=>1,'name'=>"PM",'role'=>'pm'],['id'=>0,'name'=>"Resource",'role'=>'resource']];
+        $pm = [['id'=>1,'name'=>"PM",'role'=>'pm'],['id'=>0,'name'=>"Resource",'role'=>'resource'],['id'=>2,'name'=>"Admin",'role'=>'admin']];
         return view('admin.editresource',['userinfo'=>$user,'pm'=>$pm]);
     }
 }

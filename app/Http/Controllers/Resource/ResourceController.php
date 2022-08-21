@@ -15,6 +15,8 @@ use App\Models\EffortEstimation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 
 class ResourceController extends Controller
@@ -149,8 +151,19 @@ class ResourceController extends Controller
     }
 
     function submiteffortestimate(Request $request){
+        $request->request->remove('_token');
+        $validator = Validator::make($request->all(), [
+            '*'   => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->errors());
+        }
+
+
         $estimate = EffortEstimation::where('object_id',$request->oid)->first();
         $coloumns = Timesheet::getPossibleStatuses();
+        try{
+            DB::beginTransaction();
         if($estimate == null){
             foreach($coloumns as $cols){
                 $newestimate = new EffortEstimation;
@@ -177,6 +190,12 @@ class ResourceController extends Controller
             $object->save();
 
         }
+        DB::commit();
+    }
+    catch(Exception $e){
+        DB::rollback();
+        return redirect('/resource/vieweffortestimation');
+    }
         return redirect('/resource/vieweffortestimation');
     }
 

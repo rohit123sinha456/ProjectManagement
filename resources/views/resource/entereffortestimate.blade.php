@@ -16,6 +16,9 @@
 
                         </p>
                         <div class="table-responsive">
+                          @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                          @endforeach
                             <form class="forms-sample" method="POST" action="/resource/submiteffortestimate">
                                 @csrf
                           <table class="table table-striped">

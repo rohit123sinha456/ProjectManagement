@@ -26,13 +26,13 @@
     }
     subjectSel.onchange = function() {
       //empty Chapters- and Topics- dropdowns
-  //     console.log(this.value.split("-"));
+      //console.log(subjectObject[this.value]);
       topicSel.length = 1;
       //display correct values
       for (var y in subjectObject[this.value]) {
         // var tempdata = subjectObject[this.value.split("-")[0]];
-        // console.log(tempdata);
-        topicSel.options[topicSel.options.length] = new Option(y, y);
+        console.log(subjectObject[this.value][y].oid);
+        topicSel.options[topicSel.options.length] = new Option(y, subjectObject[this.value][y].oid);
       }
     }
    

@@ -26,7 +26,7 @@ class AdminSdlcController extends Controller
 
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
-            'acrnym'   => 'required|max:8',
+            'acrnym'   => 'required|alpha_dash|max:8',
             'desc' => 'required',
         ]);
         if ($validator->fails()) {

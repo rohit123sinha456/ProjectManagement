@@ -2,10 +2,9 @@
 <script>
  
   $(function() {
-  /* ChartJS
-   * -------
-   * Data and config for chartjs
-   */
+    
+    
+
   var effortname = @json($effortname);
   var efforthours =  @json($efforthours);
   var effortdata = effortname.map((name,index)=>{

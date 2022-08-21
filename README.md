@@ -14,3 +14,21 @@ docker-compose build app
 
 # Follow the link
 https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-22-04#step-6-running-the-application-with-docker-compose
+
+# After Executing the php artisan key generate as per the link
+
+# Connect to the MYSQL Server container from remote
+- IP is the server IP
+- Port is 33061
+- user root
+- pwd null
+
+# Then create a Database known as pms ( db_init.sql is doing that -still check)
+
+# The goto the ssh terminal and migrate the database and seed it
+## To migrate the databsae 
+- docker-compose exec app php artisan migrate
+- (Optional) docker-compose exec app php artisan migrate:refresh (removes all dataa)
+
+## To seed the data base
+- docker-compose exec app php artisan db:seed

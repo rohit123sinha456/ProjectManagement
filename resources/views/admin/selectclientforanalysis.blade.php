@@ -51,13 +51,12 @@
                 <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        
-                        <h4 class="card-title">Objects</h4>
+                        <h4 class="card-title">Client</h4>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1"></label>
-                                  <p>Select a date to proceed</p>
-                                  <select name="subject" id="subject">
-                                    <option value="" selected="selected">Select subject</option>
+                                  <p>Select a Client to proceed</p>
+                                  <select class="form-control form-control-lg" name="subject" id="subject">
+                                    <option value="" selected="selected">Select Client</option>
                                   </select>
                               </div> 
                       </div>
@@ -67,12 +66,12 @@
                 <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Timesheet</h4>
+                        <h4 class="card-title">Object</h4>
                         
                             <div class="form-group">
-                                <label>Date </label>
-                                <select name="topic" id="topic">
-                                  <option value="" selected="selected">Please select subject first</option>
+                              <p>Select a Object to proceed</p>
+                                <select class="form-control form-control-lg" name="topic" id="topic">
+                                  <option value="" selected="selected">Select Object</option>
                                 </select>
 
                               </div>

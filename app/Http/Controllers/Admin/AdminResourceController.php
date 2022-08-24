@@ -19,7 +19,7 @@ class AdminResourceController extends Controller
      */
     public function index()
     {
-        $clients = User::all();
+        $clients = User::orderByDesc('created_at')->get();
         return view('admin.resources',['clients'=>$clients]);
     }
 

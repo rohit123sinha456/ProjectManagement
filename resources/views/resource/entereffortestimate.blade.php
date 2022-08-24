@@ -12,7 +12,7 @@
                       <div class="card-body">
                         <h4 class="card-title">Effort Estimation </h4>
                         <p class="card-description">
-                          Add class <code>.table-striped</code>
+                         Enter your Effort Estimate for the Object
 
                         </p>
                         <div class="table-responsive">

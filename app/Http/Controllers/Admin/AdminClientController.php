@@ -22,7 +22,7 @@ class AdminClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::orderByDesc('created_at')->get();
         return view('admin.clients',['clients'=>$clients]);
 
     }
@@ -134,6 +134,6 @@ class AdminClientController extends Controller
    
     public function destroy($id)
     {
-        //
+        // dd($id);
     }
 }

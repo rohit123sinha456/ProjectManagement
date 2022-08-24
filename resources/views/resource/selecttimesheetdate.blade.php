@@ -31,10 +31,17 @@
                       <div class="card-body">
                         
                         
-                        <h4 class="card-title">Objects</h4>
+                        <h4 class="card-title">Submission Details</h4>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1"></label>
-                                  <p>Select a date to proceed</p>
+                                @if($errors->any())
+                                  @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                  @endforeach
+
+                                @else
+                                     <p> No Error </p>
+                                @endif
                               </div> 
                       </div>
                     </div>

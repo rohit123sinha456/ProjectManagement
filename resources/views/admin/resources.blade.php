@@ -49,7 +49,7 @@
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                       <form action="/admin/resources/{{$item['id']}}" method="GET"> <button type="submit" class="btn btn-outline-secondary btn-sm">View</button> </form>
                                       <form action="/admin/resources/{{$item['id']}}/edit" method="GET"> @csrf<button type="submit" class="btn btn-outline-secondary btn-sm">Edit</button> </form>
-                                      <form action="/admin/clresourcesients/{{$item['id']}}" method="POST">@csrf<button type="submit" class="btn btn-outline-secondary btn-sm">Delete</button> </form>
+                                      {{-- <form action="/admin/clresourcesients/{{$item['id']}}" method="POST">@csrf<button type="submit" class="btn btn-outline-secondary btn-sm">Delete</button> </form> --}}
                                     </div>
                                 </td>
                                

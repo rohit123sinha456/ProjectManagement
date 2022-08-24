@@ -12,7 +12,12 @@
                         <h4 class="card-title">Timesheet Entry </h4>
                         <p class="card-description">
                           Once You Submit the values can't be updated anymore
+                          @if($errors->any())
+                                  @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                  @endforeach
 
+                                @endif
                         </p>
                         <div class="table-responsive">
                           @if($nodate)

@@ -36,9 +36,13 @@ class ResourceController extends Controller
             array_push($object_client_id,$oc->object_id);
         }
         $object_client_ids = array_values(array_unique($object_client_id));
-        $objects = ClientObject::whereIn('id',$object_client_ids)->where('state',2)->get();
-        //chain in a where cluse to show objects that are in running state[DONE]
         $selecteddate = $request->date;
+        // $date = date('d-m-y');
+
+        //dd($date > $selecteddate );
+        $objects = ClientObject::whereIn('id',$object_client_ids)->where('state',2)->where('created_at','<',$selecteddate)->get();
+        //chain in a where cluse to show objects that are in running state[DONE]
+       
         //https://www.etutorialspoint.com/index.php/11-dynamically-add-delete-html-table-rows-using-javascript
         return view('resource.entrytimesheet',['column'=>$coloumns,'issubmit'=>$issubmit,'objects'=>$objects,'dateselected'=>true,'date'=>$selecteddate]);
     }
@@ -48,11 +52,22 @@ class ResourceController extends Controller
         $userid = session('user');
         //dd($userid);
         //$inputcount = count($request->oid);
-        $this->validate($request,[
+        $validator = Validator::make($request->all(), [
             'oid'  => 'required|array',
+            'hours.*' => 'integer',
             'sdlc'  => 'required|array',
             'hours'  => 'required|array',
         ]);
+        if ($validator->fails()) {
+            return redirect('/resource/timesheetselectdate')->withErrors($validator->errors());
+        }
+
+        // $this->validate($request,[
+        //     'oid'  => 'required|array',
+        //     'oid.*' => 'integer',
+        //     'sdlc'  => 'required|array',
+        //     'hours'  => 'required|array',
+        // ]);
         $oids = $request->oid;
         $sdlcs = $request->sdlc;
         $hourss = $request->hours;
@@ -99,6 +114,14 @@ class ResourceController extends Controller
     }
 
     function submittimesheetentry(Request $request){
+        $validator = Validator::make($request->all(), [
+            'hours.*' => 'integer',
+            'hours'  => 'required|array',
+        ]);
+        if ($validator->fails()) {
+            return redirect('/resource/viewtimesheetentry')->withErrors($validator->errors());
+        }
+        
         $timesheets = Timesheet::find($request->tsid);
         $datalength = count($timesheets->toArray());
         // dd($request->input());

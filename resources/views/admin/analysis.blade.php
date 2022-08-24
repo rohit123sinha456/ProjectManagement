@@ -50,7 +50,7 @@
     },
     elements: {
       bar: {
-      backgroundColor:'rgba(255, 99, 132, 0.2)',
+      backgroundColor:'rgba(255, 99, 132, 0.6)',
       borderColor: 'rgba(255,99,132,1)',
       }
     }
@@ -66,7 +66,7 @@
           datasets: [{
             label : "Estimate",
               data: estimatedata,
-              backgroundColor: 'rgba(75,190,190,0.2)',
+              backgroundColor: 'rgba(75,190,190,0.6)',
               parsing: {
               xAxisKey: 'name',
               yAxisKey: 'hours.value'
@@ -75,7 +75,7 @@
           {
             label : "Effort",
               data: effortdata,
-              backgroundColor: 'rgba(75,100,100,0.2)',
+              backgroundColor: 'rgba(75,100,100,0.6)',
               parsing: {
               xAxisKey: 'name',
               yAxisKey: 'hours.value'

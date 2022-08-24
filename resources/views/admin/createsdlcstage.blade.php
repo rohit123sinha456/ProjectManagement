@@ -33,7 +33,9 @@
                           
                         
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                          <button class="btn btn-light">Cancel</button>
+                          {{-- <button class="btn btn-light">Cancel</button> --}}
+                          <button class="btn btn-light" onclick="history.back()">Cancel</button>
+
                         </form>
                       </div>
                     </div>

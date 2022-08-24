@@ -17,6 +17,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-larav
 
 # After Executing the php artisan key generate as per the link
 
+# For some reason check if publi/venders/chart.js has chart.min.js and not Chart.min.js
+(If possible change in code to accept Chart.min.js)
+
 # Connect to the MYSQL Server container from remote
 - IP is the server IP
 - Port is 33061

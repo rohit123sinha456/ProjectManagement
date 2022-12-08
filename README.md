@@ -30,6 +30,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-larav
 
 # The goto the ssh terminal and migrate the database and seed it
 ## To migrate the databsae 
+- php artisan clear the cache and clear the route cache
 - docker-compose exec app php artisan migrate
 - (Optional) docker-compose exec app php artisan migrate:refresh (removes all dataa)
 

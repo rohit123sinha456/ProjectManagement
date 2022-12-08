@@ -14,7 +14,11 @@
                         <p class="card-description">
                           Put in the name and description of the SDLC
                         </p>
+                        @if(!$isSdlcModelCreateForm)
                         <form class="forms-sample" action="/admin/sdlc" method="POST">
+                        @else
+                        <form class="forms-sample" action="/admin/sdlcmodels" method="POST">
+                        @endif
                             @csrf
                           <div class="form-group">
                             <label for="exampleInputName1">Name</label>
@@ -30,7 +34,21 @@
                                 <div class="error">{{ $errors->first('desc') }}</div>
                             @endif
                           </div>
-                          
+
+                          @if(!$isSdlcModelCreateForm)
+                          <div class="form-group">
+                                  <label for="exampleFormControlSelect1">SDLC Models</label>
+                                  <select class="form-control form-control-lg" id="sdlcmodel" name="sdlcmodel[]">
+                                    <option value="none" selected disabled hidden>Select an Option</option>
+                                    @foreach ($sdlcmodels as $index => $colname)
+                                      <option value={{$index}}>{{$colname}}</option>
+                                      @endforeach
+                                  </select>
+                                  @if($errors->has('sdlcmodel'))
+                                <div class="error">{{ $errors->first('sdlcmodel') }}</div>
+                            @endif
+                                </div>
+                          @endif
                         
                           <button type="submit" class="btn btn-primary mr-2">Submit</button>
                           {{-- <button class="btn btn-light">Cancel</button> --}}

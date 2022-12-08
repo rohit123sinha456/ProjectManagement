@@ -41,6 +41,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/sdlcmodels">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">SDLC Models</span>
+        </a>
+      </li>
+
 
       <li class="nav-item">
         <a class="nav-link" href="/admin/selecteddate">

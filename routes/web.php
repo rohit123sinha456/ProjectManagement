@@ -55,6 +55,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/sdlc',[AdminSdlcController::class,'index'])->middleware('useraccess:admin');
     Route::get('/sdlc/create',[AdminSdlcController::class,'create'])->middleware('useraccess:admin');
     Route::post('/sdlc',[AdminSdlcController::class,'update'])->middleware('useraccess:admin');
+    Route::get('/sdlcmodels',[AdminSdlcController::class,'sdlcmodelindex'])->middleware('useraccess:admin');
+    Route::get('/sdlcmodels/create',[AdminSdlcController::class,'sdlcmodelcreate'])->middleware('useraccess:admin');
+    Route::post('/sdlcmodels',[AdminSdlcController::class,'sdlcmodelupdate'])->middleware('useraccess:admin');
+
+
     Route::resource('clients',AdminClientController::class)->middleware('useraccess:admin');
     Route::resource('resources',AdminResourceController::class)->middleware('useraccess:admin');
     Route::post('update/resources/{id}',[AdminResourceControllerUtil::class,'updateresource'])->middleware('useraccess:admin');

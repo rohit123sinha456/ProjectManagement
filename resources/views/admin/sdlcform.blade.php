@@ -9,12 +9,25 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
+                        @if($iscreatesdlcmodel == true)
+                        <h4 class="card-title">SDLC Model</h4>
+                        <p class="card-description">
+                         Put in SDLC Models
+                        </p>
+                        @else
                         <h4 class="card-title">SDLC Stages</h4>
                         <p class="card-description">
                          Put in SDLC Stages
-                        </p>
-                        <a href="/admin/sdlc/create"> <button type="submit" class="btn btn-outline-secondary btn-sm">Create</button> </a>
+                         </p>
+                        @endif
 
+
+
+                        @if($iscreatesdlcmodel == true)
+                        <a href="/admin/sdlcmodels/create"> <button type="submit" class="btn btn-outline-secondary btn-sm">Create</button> </a>
+                        @else
+                        <a href="/admin/sdlc/create"> <button type="submit" class="btn btn-outline-secondary btn-sm">Create</button> </a>
+                        @endif
                         <div class="table-responsive">
 
                           <table class="table table-striped"  id="emptbl">
@@ -26,6 +39,11 @@
                                 <th>
                                   Short Description
                                 </th>
+                                @if(!$iscreatesdlcmodel == true)
+                                <th>
+                                  SDLC Model
+                                </th>
+                                @endif
                                 
                               </tr>
                             </thead>
@@ -43,6 +61,11 @@
                                 <td  id="col1">
                                     <label>{{$item->description}}</label>
                                 </td>
+                                @if(!$iscreatesdlcmodel == true)
+                                <td id="col2">
+                                  <label>{{$item->sdlcmodelname}}</label>
+                                </td>
+                                @endif
                                 </tr>
                                 @endforeach
                             @endif
